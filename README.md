@@ -1,7 +1,7 @@
 # Project Name
 
 Safygiphy is an updated Python wrapper for the Giphy API.
-Version 1.0.1
+Version 1.0.2
 
 ## Installation
 

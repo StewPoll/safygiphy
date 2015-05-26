@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='SafyGiphy',
-      version='1.0.1',
+      version='1.0.2',
       description='API Wrapper for the online Gif library, Giphy',
       url='https://code.tetraetc.com',
       author="TetraEtc",
