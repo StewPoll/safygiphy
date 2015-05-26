@@ -7,7 +7,5 @@ setup(name='SafyGiphy',
       author="TetraEtc",
       author_email="administrator@tetraetc.com",
       install_requires=[
-          'requests',
-          'urllib',
-          'functools'
+          'requests'
       ])
