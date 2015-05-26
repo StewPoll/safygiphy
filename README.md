@@ -1,7 +1,7 @@
 # Project Name
 
 Safygiphy is an updated Python wrapper for the Giphy API.
-Version 1.0
+Version 1.0.1
 
 ## Installation
 
@@ -10,7 +10,11 @@ Clone Repository
 python setup.py install
 ```
 
-PyPi registration is coming... soon(tm)
+OR install with Pip
+
+```
+pip install safygiphy
+```
 
 ## Usage
 
