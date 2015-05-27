@@ -1,18 +1,10 @@
-#Basic API wrapper for the Giphy API. Written by TetraEtc
-#This software is free to use for non-commercial purposes.
-#Uses __getattr__ blackmagic to perform all calls, except the get_by_id calls.
-
-__author__ = 'Stewart Polley'
-
 import requests
 import urllib
 import functools
 
 version = "v1" #Current version of the Giphy API
 base_url = "http://api.giphy.com/{}/gifs".format(version)
-
 public_token="dc6zaTOxFJmzC"
-
 
 
 class Giphy(object):
@@ -36,7 +28,7 @@ class Giphy(object):
         else:
             return "Giphy API Connection using the token: {}".format(self.token)
 
-    def Post(self, endpoint, **kwargs):
+    def Post(self, endpoint = None, **kwargs):
         """
         Global command to post.
         :param endpoint: Endpoint that is going to be used to make the call. GifsByID has no endpoint, GifByID simply
@@ -45,13 +37,20 @@ class Giphy(object):
         :return: Returns the result of the call
         """
         global base_url
-
-        if kwargs:
-            params = urllib.urlencode(kwargs)
-            url = "{}{}?api_key={}&{}".format(base_url,endpoint,self.token,params)
+        if endpoint:
+            if kwargs:
+                if "fmt" in kwargs: # Don't try to change the format or you'll break stuff!
+                    kwargs["fmt"]="json"
+                params = urllib.urlencode(kwargs)
+                url = "{}{}?api_key={}&{}".format(base_url,endpoint,self.token,params)
+            else:
+                url = "{}{}?api_key={}".format(base_url,endpoint,self.token)
         else:
-            url = "{}{}?api_key={}".format(base_url,endpoint,self.token)
-
+            if "fmt" in kwargs:
+                kwargs["fmt"]="json"
+            params = urllib.urlencode(kwargs)
+            url = "{}?api_key={}&{}".format(base_url,self.token,params)
+        print url
         result = requests.get(url)
         return result.json()
 
@@ -63,7 +62,7 @@ class Giphy(object):
         :return: GIF object
         """
         # Simplest call.
-        return self.Post("/"+id)
+        return self.Post(endpoint="/"+id)
 
 
     def gifs_by_id(self, *ids):
@@ -72,9 +71,7 @@ class Giphy(object):
         :param id: list -> List of the IDs you want to get
         :return: Multi-Part GIF object.
         """
-        global base_url
-        url = base_url +"?api_key={}&ids={}".format(self.token,",".join(ids))
-        return requests.get(url)
+        return self.Post(ids=','.join(ids))
 
 
     def __getattr__(self, attr):
