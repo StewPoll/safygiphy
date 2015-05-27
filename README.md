@@ -68,6 +68,8 @@ Using the argument of `fmt="html"` in any calls will be converted back to `fmt="
 5. Submit a pull request :D
 
 ## History
+v 1.2 - 2015/05/27 - Further refinements on the code.
+
 v 1.1 - 2015/05/27 - Fixed an issue with gifs_by_id, and improved code.
 
 v 1.0 - 2015/05/26 - Initial Commit and Readme
