@@ -8,4 +8,6 @@ setup(name='safygiphy',
       author_email="administrator@tetraetc.com",
       install_requires=[
           'requests'
-      ])
+      ],
+      packages=['safygiphy']
+      )
