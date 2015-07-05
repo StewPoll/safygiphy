@@ -3,7 +3,7 @@ import urllib
 import functools
 
 version = "v1" #Current version of the Giphy API
-base_url = "http://api.giphy.com/{}/gifs".format(version)
+base_url = "http://api.giphy.com/{0}/gifs".format(version)
 public_token="dc6zaTOxFJmzC"
 
 
@@ -49,8 +49,7 @@ class Giphy(object):
             if "fmt" in kwargs:
                 kwargs["fmt"]="json"
             params = urllib.urlencode(kwargs)
-            url = "{}?api_key={}&{}".format(base_url,self.token,params)
-        print url
+            url = "{0}?api_key={1}&{2}".format(base_url,self.token,params)
         result = requests.get(url)
         return result.json()
 
