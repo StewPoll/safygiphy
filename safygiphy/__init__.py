@@ -1,6 +1,11 @@
-import requests
-import urllib
 import functools
+import requests
+import sys # Sys needed to determine python version
+if sys.version_info[0] == 3:
+    from urllib.parse import urlencode
+else:
+    from urllib import urlencode
+
 
 version = "v1" #Current version of the Giphy API
 base_url = "http://api.giphy.com/{0}/gifs".format(version)
@@ -8,7 +13,6 @@ public_token="dc6zaTOxFJmzC"
 
 
 class Giphy(object):
-
     def __init__(self, token=public_token):
         """
         Initialises your connection.
@@ -40,19 +44,19 @@ class Giphy(object):
         if endpoint:
             if kwargs:
                 if "fmt" in kwargs: # Don't try to change the format or you'll break stuff!
-                    kwargs["fmt"]="json"
-                params = urllib.urlencode(kwargs)
-                url = "{}{}?api_key={}&{}".format(base_url,endpoint,self.token,params)
+                    del(kwargs["fmt"])
+                params = urlencode(kwargs)
+                url = "{0}{1}?api_key={2}&{3}".format(base_url,endpoint,self.token,params)
             else:
-                url = "{}{}?api_key={}".format(base_url,endpoint,self.token)
+                url = "{0}{1}?api_key={2}".format(base_url,endpoint,self.token)
         else:
             if "fmt" in kwargs:
                 kwargs["fmt"]="json"
-            params = urllib.urlencode(kwargs)
+
+            params = urlencode(kwargs)
             url = "{0}?api_key={1}&{2}".format(base_url,self.token,params)
         result = requests.get(url)
         return result.json()
-
 
     def gif_by_id(self, id):
         """
@@ -63,15 +67,13 @@ class Giphy(object):
         # Simplest call.
         return self.Post(endpoint="/"+id)
 
-
-    def gifs_by_id(self, *ids):
+    def gifs_by_id(self, ids):
         """
         Retrieves a specific set of GIFs
         :param id: list -> List of the IDs you want to get
         :return: Multi-Part GIF object.
         """
         return self.Post(ids=','.join(ids))
-
 
     def __getattr__(self, attr):
         """
@@ -81,8 +83,3 @@ class Giphy(object):
         """
         endpoint = "/{}".format(attr) # Appends the / to the URL
         return functools.partial(self.Post, endpoint) # calls the Post function
-
-
-
-
-
