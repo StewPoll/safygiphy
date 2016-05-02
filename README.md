@@ -1,9 +1,7 @@
-TODO: Add documentation about Sticky class
-TODO: Add documentation about Combined class
-TODO: Add date of next publication
 # SafyGiphy
 
-Safygiphy is an updated Python wrapper for the Giphy API.
+Safygiphy is an updated Python wrapper for the Giphy API. Capable of handling all GIF and STICKER endpoints. The only functionality currently missing is the UPLOAD functionality.
+
 Version 1.1.0
 
 Full documentation of the Giphy API is [available here](https://github.com/Giphy/GiphyAPI).
@@ -23,12 +21,14 @@ pip install safygiphy
 
 ## Usage
 
+### GIF Endpoints
+
 To use:
 
 ```python
 import safygiphy
-c = safigiphy.Giphy()
-r = c.random(tag="success")
+g = safigiphy.Giphy()
+r = g.random(tag="success")
 # Will return a random GIF with the tag "success"
 ```
 
@@ -36,7 +36,7 @@ If you have an API token, you can specify it when calling the Giphy object.
 
 ```python
 import safigiphy
-c = safigiphy.Giphy(token=string)
+g = safigiphy.Giphy(token=string)
 ```
 
 If you know the ID of a specific GIF you want to retrieve, you can use the `.gif_by_id` method to get the Gif.
@@ -57,11 +57,51 @@ g.search()
 g.random()
 g.translate()
 g.trending()
-... Any other endpoints Giphy adds in the future.
+... Any other endpoint Giphy adds in the future.
 ```
 
 Using the argument of `fmt="html"` in any calls will be ignored by the wrapper.
 
+### STICKER Endpoints
+
+To use:
+
+```python
+import safygiphy
+s = safigiphy.Sticky()
+res = s.random(tag="success")
+# Will return a random STICKER tagged with "Success"
+```
+
+All of Giphy's STICKER endpoints are currently support
+```python
+g.search(s="term")
+s.random()
+s.trending()
+s.translate(s="phrase')
+... Any other endpoint Giphy adds in the future
+```
+
+As with the GIF endpoints, the `fmt="html"` argument is ignored by the wrapper
+
+### Combined
+
+If you want to get both GIF and Sticker objects you can use the Combined class.
+
+```python
+import safygiphy
+c = safigiphy.Combined()
+gif_res = c.gif.random(tag="success")
+# Will return a random GIF tagged with "success"
+sti_res = c.sticker.random(tag="success")
+# Will return a random STICKER tagged with "success"
+```
+
+## Contributors
+
+ - TetraEtc
+ 
+I'm lonely! Feel free to contribute to keep me company!
 
 
 ## Contributing
@@ -74,7 +114,10 @@ Using the argument of `fmt="html"` in any calls will be ignored by the wrapper.
 
 ## History
 
-v 1.1.0 - 2016/05/02 - Added Sticky and Combined objects. Added unit tests
+v 1.1.0 - 2016/05/02 - Added Sticky class capable of handling Sticker Endpoitns
+                       Added Combined class capable of handling both GIF and Sticker Endpoints
+                       Added Unit Tests
+                       Fixed Python 2.6 support
 
 v 1.0.3 - 2015/05/28 - Fixed minor issues
 
