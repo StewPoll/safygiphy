@@ -57,7 +57,7 @@ class Giphy(object):
         :return: GIF object
         """
         # Simplest call.
-        return self.Post(endpoint="/{}".format(id))
+        return self.Post(endpoint="/{0}".format(id))
 
     def gifs_by_id(self, ids):
         """
