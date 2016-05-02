@@ -1,7 +1,10 @@
-# Project Name
+TODO: Add documentation about Sticky class
+TODO: Add documentation about Combined class
+TODO: Add date of next publication
+# SafyGiphy
 
 Safygiphy is an updated Python wrapper for the Giphy API.
-Version 1.0.3
+Version 1.1.0
 
 Full documentation of the Giphy API is [available here](https://github.com/Giphy/GiphyAPI).
 
@@ -57,7 +60,9 @@ g.trending()
 ... Any other endpoints Giphy adds in the future.
 ```
 
-Using the argument of `fmt="html"` in any calls will be converted back to `fmt="json"` by the wrapper, as it won't work otherwise. 
+Using the argument of `fmt="html"` in any calls will be ignored by the wrapper.
+
+
 
 ## Contributing
 
@@ -68,6 +73,9 @@ Using the argument of `fmt="html"` in any calls will be converted back to `fmt="
 5. Submit a pull request :D
 
 ## History
+
+v 1.1.0 - 2016/05/02 - Added Sticky and Combined objects. Added unit tests
+
 v 1.0.3 - 2015/05/28 - Fixed minor issues
 
 v 1.0.2 - 2015/05/27 - Further refinements on the code.
@@ -77,7 +85,7 @@ v 1.0.1 - 2015/05/27 - Fixed an issue with gifs_by_id, and improved code.
 v 1.0.0 - 2015/05/26 - Initial Commit and Readme
 
 ## License
-Copyright (c) 2015 Stewart Polley
+Copyright (c) 2016 Stewart Polley
 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:

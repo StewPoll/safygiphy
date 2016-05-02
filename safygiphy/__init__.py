@@ -8,53 +8,45 @@ else:
 
 
 version = "v1" #Current version of the Giphy API
-base_url = "http://api.giphy.com/{0}/gifs".format(version)
-public_token="dc6zaTOxFJmzC"
+base_url = "http://api.giphy.com/{0}/".format(version)
+upload_url = "http://upload.giphy.com/{0}/".format(version)
+public_token = "dc6zaTOxFJmzC"
 
 
 class Giphy(object):
     def __init__(self, token=public_token):
         """
-        Initialises your connection.
-        :param token: Your API Token. If none supplied, usesthe Public API Key
+        Object that handles making GIF related calls
+        :param token: Your GIF API Token. If none supplied, uses the Public GIF API Key
         :return:
         """
+        global base_url
         self.token=token
+        self.base = base_url + "gifs"
 
-    def __str__(self):
-        global public_token
-        """
-        Random String method, cause why not?
-        :return: String describing the connection
-        """
-        if self.token == public_token:
-            return "Giphy API Connection using the public API token."
-        else:
-            return "Giphy API Connection using the token: {}".format(self.token)
 
     def Post(self, endpoint = None, **kwargs):
         """
-        Global command to post.
+        Function that handles all calls for GIFs
         :param endpoint: Endpoint that is going to be used to make the call. GifsByID has no endpoint, GifByID simply
         uses the ID as the endpoint. These methods are hardcoded though.
-        :param kwargs: Options - Options for the call, such as Rating, Format and Search terms.
+        :param kwargs: Options - Options for the call, such as Rating and Search terms.
         :return: Returns the result of the call
         """
-        global base_url
         if endpoint:
             if kwargs:
-                if "fmt" in kwargs: # Don't try to change the format or you'll break stuff!
+                if "fmt" in kwargs:
                     del(kwargs["fmt"])
                 params = urlencode(kwargs)
-                url = "{0}{1}?api_key={2}&{3}".format(base_url,endpoint,self.token,params)
+                url = "{0}{1}?api_key={2}&{3}".format(self.base,endpoint,self.token,params)
             else:
-                url = "{0}{1}?api_key={2}".format(base_url,endpoint,self.token)
+                url = "{0}{1}?api_key={2}".format(self.base,endpoint,self.token)
         else:
             if "fmt" in kwargs:
                 kwargs["fmt"]="json"
 
             params = urlencode(kwargs)
-            url = "{0}?api_key={1}&{2}".format(base_url,self.token,params)
+            url = "{0}?api_key={1}&{2}".format(self.base,self.token,params)
         result = requests.get(url)
         return result.json()
 
@@ -65,7 +57,7 @@ class Giphy(object):
         :return: GIF object
         """
         # Simplest call.
-        return self.Post(endpoint="/"+id)
+        return self.Post(endpoint="/{0}".format(id))
 
     def gifs_by_id(self, ids):
         """
@@ -81,5 +73,64 @@ class Giphy(object):
         :param attr: The endpoint of the call
         :return: Gif object
         """
-        endpoint = "/{}".format(attr) # Appends the / to the URL
+        endpoint = "/{0}".format(attr) # Appends the / to the URL
         return functools.partial(self.Post, endpoint) # calls the Post function
+
+
+class Sticky(object):
+    def __init__(self, token=public_token):
+        """
+        Object that handles making STICKER related calls
+        :param token: Your STICKER API Token. If none supplied uses the Public STICKER API Key
+        :return:
+        """
+        global base_url
+        self.token = token
+        self.base = base_url + "stickers"
+
+    def Post(self, endpoint = None, **kwargs):
+        """
+        Function that handles all calls for STICKERS
+        :param endpoint: str - The chosen endpoint used to make the call
+        :param kwargs: Options - Options for the call, such as Rating, Search Term, Tags etc
+        :return: dict - Returns the result of the call
+        """
+        # TODO: Check if there's a STICKER endpoint that uses the base URL
+        # TODO: Check if there's any options that we don't want to send out!
+        if endpoint:
+            if kwargs:
+                if "fmt" in kwargs:
+                    del(kwargs["fmt"])
+                params = urlencode(kwargs)
+                # TODO: Ensure this is a valid URL pattern
+                url = "{0}{1}?api_key={2}&{3}".format(self.base, endpoint, self.token, params)
+            else:
+                url = "{0}{1}?api_key={2}".format(self.base, endpoint, self.token)
+        else:
+            params = urlencode(kwargs)
+            url = "{0}?api_key={1}&{2}".format(self.base, self.token, params)
+        result = requests.get(url)
+        return result.json()
+
+    # TODO: Check which API Endpoints need hardcoding, which can use __getattr__
+    # TODO: Hardcode any endpoints that need hardcoding!
+
+    def __getattr__(self, attr):
+        """
+        All calls that don't have hardcoded endpoints use lovely little system
+        :param attr: The endpoint of the call
+        :return: Sticker object
+        """
+        endpoint = "/{0}".format(attr)
+        return functools.partial(self.Post, endpoint)
+
+
+class Combined(object):
+    def __init__(self, gif_token=public_token, sticker_token=public_token):
+        """
+        Object that has sub attributes that is capable of making EITHER calls using self.gifs.POST or
+        self.stickers.post
+        :return:
+        """
+        self.gif = Giphy(token=gif_token)
+        self.sticker = Sticky(token=sticker_token)
