@@ -9,15 +9,12 @@ else:
 
 version = "v1" #Current version of the Giphy API
 base_url = "http://api.giphy.com/{0}/".format(version)
-public_tokens = {
-    "gifs": "dc6zaTOxFJmzC",
-    "stickers": ""
-    # TODO: CHECK PUBLIC STICKER API TOKEN
-}
+upload_url = "http://upload.giphy.com/{0}/".format(version)
+public_token = "dc6zaTOxFJmzC"
 
 
 class Giphy(object):
-    def __init__(self, token=public_tokens["gifs"]):
+    def __init__(self, token=public_token):
         """
         Object that handles making GIF related calls
         :param token: Your GIF API Token. If none supplied, uses the Public GIF API Key
@@ -38,7 +35,7 @@ class Giphy(object):
         """
         if endpoint:
             if kwargs:
-                if "fmt" in kwargs: # Don't try to change the format or you'll break stuff!
+                if "fmt" in kwargs:
                     del(kwargs["fmt"])
                 params = urlencode(kwargs)
                 url = "{0}{1}?api_key={2}&{3}".format(self.base,endpoint,self.token,params)
@@ -60,8 +57,7 @@ class Giphy(object):
         :return: GIF object
         """
         # Simplest call.
-        if type
-            return self.Post(endpoint="/{}".format(id))
+        return self.Post(endpoint="/{}".format(id))
 
     def gifs_by_id(self, ids):
         """
@@ -82,7 +78,7 @@ class Giphy(object):
 
 
 class Sticky(object):
-    def __init__(self, token=public_tokens["stickers"]):
+    def __init__(self, token=public_token):
         """
         Object that handles making STICKER related calls
         :param token: Your STICKER API Token. If none supplied uses the Public STICKER API Key
@@ -90,7 +86,7 @@ class Sticky(object):
         """
         global base_url
         self.token = token
-        self.base = base_url + "stickers" # TODO: CHECK IF THIS IS VALID URL
+        self.base = base_url + "stickers"
 
     def Post(self, endpoint = None, **kwargs):
         """
@@ -103,6 +99,8 @@ class Sticky(object):
         # TODO: Check if there's any options that we don't want to send out!
         if endpoint:
             if kwargs:
+                if "fmt" in kwargs:
+                    del(kwargs["fmt"])
                 params = urlencode(kwargs)
                 # TODO: Ensure this is a valid URL pattern
                 url = "{0}{1}?api_key={2}&{3}".format(self.base, endpoint, self.token, params)
@@ -127,12 +125,12 @@ class Sticky(object):
         return functools.partial(self.Post, endpoint)
 
 
- class Combined(object):
-     def __init__(self, gif_token=public_tokens["gifs"], sticker_token=public_tokens["stickers"]):
-         """
-         Object that has sub attributes that is capable of making EITHER calls using self.gifs.POST or
-         self.stickers.post
-         :return:
-         """
-         self.gif = Giphy(token=gif_token)
-         self.sticker = Sticky(token=sticker_token)
+class Combined(object):
+    def __init__(self, gif_token=public_token, sticker_token=public_token):
+        """
+        Object that has sub attributes that is capable of making EITHER calls using self.gifs.POST or
+        self.stickers.post
+        :return:
+        """
+        self.gif = Giphy(token=gif_token)
+        self.sticker = Sticky(token=sticker_token)

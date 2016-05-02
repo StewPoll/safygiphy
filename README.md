@@ -60,7 +60,9 @@ g.trending()
 ... Any other endpoints Giphy adds in the future.
 ```
 
-Using the argument of `fmt="html"` in any calls will be ignored by the wrapper, as it won't work otherwise. 
+Using the argument of `fmt="html"` in any calls will be ignored by the wrapper.
+
+
 
 ## Contributing
 
@@ -72,7 +74,7 @@ Using the argument of `fmt="html"` in any calls will be ignored by the wrapper, 
 
 ## History
 
-v 1.1.0 - 2016/00/00 - Added Sticky and Combined objects. Added unit tests
+v 1.1.0 - 2016/05/02 - Added Sticky and Combined objects. Added unit tests
 
 v 1.0.3 - 2015/05/28 - Fixed minor issues
 
