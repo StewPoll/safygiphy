@@ -1,10 +1,14 @@
 language: python
 python:
-  - "2.6"
-  - "2.7"
-  - "3.4"
-  - "3.5"
+- '2.6'
+- '2.7'
+- '3.4'
+- '3.5'
 install:
-  - pip install requests
+- pip install requests
 script:
-  - py.test test.py
+- py.test test.py
+notifications:
+  slack:
+    secure: Nc9tMZHPr68zRIBRjvdSNbreJ1GLqaw6Syp/tePO8+yP68XLr34Rg55Qb2XFaVwl6V/RZ3KagbEv7l5K3cw7JHaRgQ4kDPL1aqfiM9rxF6454TCfHue4fOnjU9GrYsv1JbpUYsy+UhbD3twm3AF9/c6ngS+VmwlgD74nUrAcdXKrX/CxZtOdbXSjyVxYPsWv6CuA/l1HmoIiCjSBAHYmqD4uvcQGkDXJUqRqFsQNjfHkENPLMOmwnvZKdAOEjEsv6aiSAhF8p4F6nmgOcqUPv1RL+SBBpSvX/MvvOzvZcj14z7d1f6spgV8QTzFMpTngUjwl1dpdMcLt7J0zCdPRPYq9iz735gPTTZNzlgArDFE7CRqS8UAbROXMDXkt0QWg67ypD8P7t04Nsbk3eHA19AEZNxiZgVwalNlCyIm6XMqdLGodlyeG07zvAeqcVgj3xtVdwJ1BYTYSCeB8xOqVWc0WkgsPsV5Oi9F0E6qYfNkhJkTngkaiX1E+CzEv1LWu3NzAHD+zRPtTHndtn2GCw5EeKTjmGvg7Pib3uzKDuKRap1ZBPB5hlFHZICht6FdcBkLN9kjG0YJQZd/Xe7K7ghrgcD+9U2rW2RYyXWYVu3y7JkBj6BuJ/PiksUpUszJMeN3DezRQi8F4wdoDQlK92+FeDx79rD2BTg0QkHwxDyE=
+  email: false
