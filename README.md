@@ -27,7 +27,7 @@ To use:
 
 ```python
 import safygiphy
-g = safigiphy.Giphy()
+g = safygiphy.Giphy()
 r = g.random(tag="success")
 # Will return a random GIF with the tag "success"
 ```
@@ -35,8 +35,8 @@ r = g.random(tag="success")
 If you have an API token, you can specify it when calling the Giphy object.
 
 ```python
-import safigiphy
-g = safigiphy.Giphy(token=string)
+import safygiphy
+g = safygiphy.Giphy(token=string)
 ```
 
 If you know the ID of a specific GIF you want to retrieve, you can use the `.gif_by_id` method to get the Gif.
@@ -49,7 +49,7 @@ If you have multiple IDs you need to get, you can use `gifs_by_id` to get these 
 gifs = g.gifs_by_id("id1","id2"..."idn")
 ```
 
-For all othe endpoints, simply use the endpoint as the method name. Pythons `__getattr__` and `functools` do the rest for you. Simply specify the endpoint, and any kwargs.
+For all other endpoints, simply use the endpoint as the method name. Pythons `__getattr__` and `functools` do the rest for you. Simply specify the endpoint, and any kwargs.
 
 ```python
 g.translate()
@@ -68,7 +68,7 @@ To use:
 
 ```python
 import safygiphy
-s = safigiphy.Sticky()
+s = safygiphy.Sticky()
 res = s.random(tag="success")
 # Will return a random STICKER tagged with "Success"
 ```
@@ -90,7 +90,7 @@ If you want to get both GIF and Sticker objects you can use the Combined class.
 
 ```python
 import safygiphy
-c = safigiphy.Combined()
+c = safygiphy.Combined()
 gif_res = c.gif.random(tag="success")
 # Will return a random GIF tagged with "success"
 sti_res = c.sticker.random(tag="success")
@@ -100,7 +100,7 @@ sti_res = c.sticker.random(tag="success")
 ## Contributors
 
  - TetraEtc
- 
+
 I'm lonely! Feel free to contribute to keep me company!
 
 
@@ -114,7 +114,7 @@ I'm lonely! Feel free to contribute to keep me company!
 
 ## History
 
-v 1.1.0 - 2016/05/02 - Added Sticky class capable of handling Sticker Endpoitns
+v 1.1.0 - 2016/05/02 - Added Sticky class capable of handling Sticker Endpoints
                        Added Combined class capable of handling both GIF and Sticker Endpoints
                        Added Unit Tests
                        Fixed Python 2.6 support
