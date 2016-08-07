@@ -58,7 +58,7 @@ def test_invalid_method():
     """
     g = safygiphy.Giphy()
     res = g.invalid_method()
-    assert res == {u'meta': {u'status': 2, u'msg': u"Illegal string offset 'is_hidden'"}}
+    assert res['meta']['status'] == 404
 
 """
 Sticky object tests
@@ -167,7 +167,7 @@ def test_combined_invalid_method():
     """
     c = safygiphy.Combined()
     res = c.gif.invalid_method()
-    assert res == {u'meta': {u'status': 2, u'msg': u"Illegal string offset 'is_hidden'"}}
+    assert res["meta"]["status"] == 404
     
 
 def test_combined_sticker_search():
