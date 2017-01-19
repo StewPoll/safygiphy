@@ -114,6 +114,8 @@ I'm lonely! Feel free to contribute to keep me company!
 
 ## History
 
+v 1.1.1 - 2017/01/20 - Updated base URL's to use HTTPS instead of HTTP
+
 v 1.1.0 - 2016/05/02 - Added Sticky class capable of handling Sticker Endpoints
                        Added Combined class capable of handling both GIF and Sticker Endpoints
                        Added Unit Tests
