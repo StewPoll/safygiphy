@@ -9,7 +9,7 @@ Tests all (current) endpoints of the Giphy API
 def test_gif_by_id():
     g = safygiphy.Giphy()
     res = g.gif_by_id("Z34IiLkiwSbKw")
-    assert res["data"]["embed_url"] == "http://giphy.com/embed/Z34IiLkiwSbKw"
+    assert res["data"]["embed_url"] == "https://giphy.com/embed/Z34IiLkiwSbKw"
 
 
 def test_gifs_by_id():
@@ -118,7 +118,7 @@ Combined object tests
 def test_combined_gif_by_id():
     c = safygiphy.Combined()
     res = c.gif.gif_by_id("Z34IiLkiwSbKw")
-    assert res["data"]["embed_url"] == "http://giphy.com/embed/Z34IiLkiwSbKw"
+    assert res["data"]["embed_url"] == "https://giphy.com/embed/Z34IiLkiwSbKw"
 
 
 def test_combined_gifs_by_id():

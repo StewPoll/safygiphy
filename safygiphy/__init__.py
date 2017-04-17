@@ -8,8 +8,8 @@ else:
 
 
 version = "v1" #Current version of the Giphy API
-base_url = "http://api.giphy.com/{0}/".format(version)
-upload_url = "http://upload.giphy.com/{0}/".format(version)
+base_url = "https://api.giphy.com/{0}/".format(version)
+upload_url = "https://upload.giphy.com/{0}/".format(version)
 public_token = "dc6zaTOxFJmzC"
 
 

@@ -2,7 +2,7 @@
 
 Safygiphy is an updated Python wrapper for the Giphy API. Capable of handling all GIF and STICKER endpoints. The only functionality currently missing is the UPLOAD functionality.
 
-Version 1.1.0
+Version 1.1.1
 
 Full documentation of the Giphy API is [available here](https://github.com/Giphy/GiphyAPI).
 
@@ -113,6 +113,8 @@ I'm lonely! Feel free to contribute to keep me company!
 5. Submit a pull request :D
 
 ## History
+
+v 1.1.1 - 2017/01/20 - Updated base URL's to use HTTPS instead of HTTP
 
 v 1.1.0 - 2016/05/02 - Added Sticky class capable of handling Sticker Endpoints
                        Added Combined class capable of handling both GIF and Sticker Endpoints
