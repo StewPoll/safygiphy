@@ -108,7 +108,7 @@ def test_sticker_format_override():
 def test_sticker_invalid_endpoint():
     s = safygiphy.Sticky()
     res = s.invalid_method()
-    assert res == {u'meta': {u'status': 404, u'msg': u'Not Found!'}}
+    assert res['meta']['status'] == 404
 
 """
 Combined object tests
@@ -213,4 +213,4 @@ def test_combined_sticker_format_override():
 def test_combined_sticker_invalid_endpoint():
     c = safygiphy.Combined()
     res = c.sticker.invalid_method()
-    assert res == {u'meta': {u'status': 404, u'msg': u'Not Found!'}}
+    assert res['meta']['status'] == 404
