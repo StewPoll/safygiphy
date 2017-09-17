@@ -99,7 +99,7 @@ sti_res = c.sticker.random(tag="success")
 
 ## Contributors
 
- - TetraEtc
+ - StewPoll
 
 I'm lonely! Feel free to contribute to keep me company!
 
@@ -113,6 +113,9 @@ I'm lonely! Feel free to contribute to keep me company!
 5. Submit a pull request :D
 
 ## History
+
+v 1.1.2 - 2017/09/17 - Updated Unit Tests to better handle 'By ID Endpoints' if the ID now 404's
+                       Changed URLs to StewPoll
 
 v 1.1.1 - 2017/01/20 - Updated base URL's to use HTTPS instead of HTTP
 

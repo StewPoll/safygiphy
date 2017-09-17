@@ -1,4 +1,5 @@
 import safygiphy
+import json
 
 """
 Giphy object tests
@@ -8,8 +9,9 @@ Tests all (current) endpoints of the Giphy API
 
 def test_gif_by_id():
     g = safygiphy.Giphy()
-    res = g.gif_by_id("Z34IiLkiwSbKw")
-    assert res["data"]["embed_url"] == "https://giphy.com/embed/Z34IiLkiwSbKw"
+    rand_id = g.random()['data']['id']
+    res = g.gif_by_id(rand_id)
+    assert res["data"]["embed_url"] == "https://giphy.com/embed/" + rand_id
 
 
 def test_gifs_by_id():
@@ -117,8 +119,9 @@ Combined object tests
 
 def test_combined_gif_by_id():
     c = safygiphy.Combined()
-    res = c.gif.gif_by_id("Z34IiLkiwSbKw")
-    assert res["data"]["embed_url"] == "https://giphy.com/embed/Z34IiLkiwSbKw"
+    rand_id = c.gif.random()['data']['id']
+    res = c.gif.gif_by_id(rand_id)
+    assert res["data"]["embed_url"] == "https://giphy.com/embed/" + rand_id
 
 
 def test_combined_gifs_by_id():
